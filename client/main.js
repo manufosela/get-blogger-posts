@@ -5,8 +5,10 @@ import { HTTP } from 'meteor/http'
 import './main.html';
 
 Session.set('blogData', {});
-Session.set('blogger-api-key', '');
-Session.set('auth-key', '');
+if (!Session.get('auth-key')) {
+  Session.set('blogger-api-key', '');
+  Session.set('auth-key', '');
+}
 Session.set('loading', false);
 
 Template.bloggerForm.onCreated(function bloggerFormOnCreated() {
