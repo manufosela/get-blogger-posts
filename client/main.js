@@ -10,6 +10,7 @@ if (!Session.get('auth-key')) {
   Session.set('auth-key', '');
 }
 Session.set('loading', false);
+Session.set('numPosts', 0);
 
 Template.bloggerForm.onCreated(function bloggerFormOnCreated() {
   this.baseUrl = new ReactiveVar('https://www.googleapis.com/blogger/v3/blogs/');
@@ -45,9 +46,9 @@ Template.bloggerForm.events({
       {},
       function (error, result) {
         if (!error) {
-          Session.set('loading', false);
           Session.set('blogData', JSON.parse(result.content));
           console.log(result.content);
+          getNumPosts(instance.baseUrl.get());
         }
       });
   }
@@ -64,6 +65,9 @@ Template.blogData.helpers({
       blogData = Session.get('blogData');
     }
     return blogData;
+  },
+  numPosts() {
+    return Session.get('numPosts');
   }
 });
 
