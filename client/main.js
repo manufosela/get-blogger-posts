@@ -4,6 +4,8 @@ import { HTTP } from 'meteor/http'
 
 import './main.html';
 
+Posts = new Mongo.Collection('posts');
+
 Session.set('blogData', {});
 if (!Session.get('auth-key')) {
   Session.set('blogger-api-key', '');
@@ -11,6 +13,7 @@ if (!Session.get('auth-key')) {
 }
 Session.set('loading', false);
 Session.set('numPosts', 0);
+Session.set('post',[]);
 
 Template.bloggerForm.onCreated(function bloggerFormOnCreated() {
   this.baseUrl = new ReactiveVar('https://www.googleapis.com/blogger/v3/blogs/');

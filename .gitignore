@@ -1,4 +1,5 @@
 node_modules/
 .meteor
 .datos
-session.js
+client/session.js
+private
